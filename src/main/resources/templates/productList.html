@@ -17,6 +17,7 @@
             <th scope="col">Product Name</th>
             <th scope="col">Quantity</th>
             <th scope="col">Edit?</th>
+            <th scope="col">Delete?</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,11 @@
                 <a th:href="@{/product/edit/{id}(id=${product.productId})}">
                     <button>Edit</button>
                 </a>
+            </td>
+            <td>
+                <form th:action="@{/product/delete/{id}(id=${product.productId})}" method="post">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
             </td>
         </tr>
         </tbody>
