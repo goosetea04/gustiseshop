@@ -23,3 +23,31 @@ When I initially ran pmd.yml that gave me the log with errors, there was just on
 ### Reflection 2
 
 In my opinion, I have applied the concepts of CI well in my github workflows. Continuous integration (CI) is a software development practice where code changes from multiple contributors are automatically integrated into a shared repository several times a day. In my case, my GitHub workflows are automatically triggering when changes are pushed to the repository. This means that whenever I push to github, I run unit tests and perform static code analysis. Since this is an implementation of me using CI, this will surely improve my coding ability in the future.
+
+# Assignment 3
+
+### Reflection 1
+
+The SOLID Principles I applied to my code are S (ingle Responsibility Principle), O (Open-Closed Principle), and D (Dependency Inversions Principle). I did not find suitable problems and fixes regarding L (Lizkov-substitution Principle) and I (Inverse Segregation Principle)
+
+1. **Single Responsibility Principle** - I separated the CarController and the ProductController that were initially grouped into one .java file. We do this since we know that one class should only have one responsibility, hence why I separataed the two.
+2. **Open-Closed principle** - I noticed that THe repositories CarRepository and ProductRepository had similar functions and uses. I generalised them both to implement from RepositoryBase(). This is so that if we want to modify or add a repository, we can utilise the base repo.
+3. **Dependency-Inversions Principle** - This principle is another contributing factor as to why I split CarController and ProductController. We gravitate towards more abstraction compared to concrete implementation.
+
+### Reflection 2
+
+There are many advantages of having SOLID Principles put in place over not. 
+
+We know that well-organized code leads to more efficient debugging, reading, and testing processes, as demonstrated by breaking down classes like CarController and ProductController. Additionally, **the Single Responsibility Principle (SRP)** ensures that functions have a clear and singular purpose, enhancing maintainability and readability by allowing developers to understand their functionality simply by examining their names. 
+
+Additionally, having SOLID also removes unnecessary inheritance. Avoiding unnecessary multilevel inheritance, such as having `CarController.java` inherit from `ProductController.java`, helps prevent confusion about class attributes, maintaining code clarity and simplicity. 
+
+Another advantage lies in the ease of developing new features without disrupting existing code and tests. For instance, creating new interfaces for classes with similar functionality enables smoother implementation and comparison of future features.
+
+Lastly, **the Interface Segregation Principle (ISP)** underscores the importance of intuition over code length, suggesting that splitting interfaces with more representative names leads to quicker comprehension of their purposes. These benefits collectively contribute to creating cleaner, more maintainable, and scalable software systems.
+
+In conclusion, implementing SOLID has alot of advantages in the coding development environment. These benefits are more felt when working with multiple programmers and also while passing down responsibilities to other programmers. The level of intuition and clarity provided provide efficiency to the workflow.
+
+### Reflection 3 
+
+A major problem that SOLID brings is Overcomplexity and Overnengineering. Someone wanting to modfiy our code may find it easier to follow but the implementation they would have to do to achieve those modifciations would be much more than if we were to not apply solid principles. Furthermore, SOLID also encourages abstraction so that our program will be too abstract meaning, that over time, our codebase might be harder to understand and maintain.
