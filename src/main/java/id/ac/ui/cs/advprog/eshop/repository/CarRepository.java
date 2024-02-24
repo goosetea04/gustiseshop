@@ -3,7 +3,7 @@ import id.ac.ui.cs.advprog.eshop.model.Car;
 import org.springframework.stereotype.Repository;
 import java.util.*;
 @Repository
-public class CarRepository {
+public class CarRepository implements RepositoryBase<Car>{
     static int id = 0;
     private List<Car> carData = new ArrayList<>();
     public Car create(Car car){
@@ -14,8 +14,8 @@ public class CarRepository {
         carData.add(car);
         return car;
     }
-    public Iterator<Car> findAll(){
-        return carData.iterator();
+    public List<Car> findAll(){
+        return carData;
     }
     public Car findById(String id){
         for (Car car : carData) {
@@ -37,5 +37,15 @@ public class CarRepository {
         }
         return null;
     }
-    public void delete(String id) {carData.removeIf(car -> car.getCarId().equals(id));}
+    public Car delete(String id) {
+        Iterator<Car> iterator = carData.iterator();
+        while (iterator.hasNext()) {
+            Car car = iterator.next();
+            if (car.getCarId().equals(id)) {
+                iterator.remove();
+                return car;
+            }
+        }
+        return null;
+    }
 }

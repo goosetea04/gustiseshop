@@ -6,19 +6,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 @Repository
-public class ProductRepository {
+public class ProductRepository implements RepositoryBase<Product> {
     private List<Product> productData = new ArrayList<>();
 
+    @Override
     public Product create(Product product) {
         productData.add(product);
         return product;
     }
-    public boolean delete(Product product) {
-        return productData.remove(product);
+
+    @Override
+    public Product delete(String productId) {
+        Iterator<Product> iterator = productData.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getProductId().equals(productId)) {
+                iterator.remove();
+                return product;
+            }
+        }
+        return null; // Product not found
     }
 
     public Product replace(int index, Product product) {
-        return productData.set(index, product);
+        if (index >= 0 && index < productData.size()) {
+            return productData.set(index, product);
+        }
+        return null; // Index out of bounds
     }
 
     public Product edit(Product editedProduct) {
@@ -32,19 +46,30 @@ public class ProductRepository {
         return null; // Product not found
     }
 
-    public boolean delete(String productId) {
-        Iterator<Product> iterator = productData.iterator();
-        while (iterator.hasNext()) {
-            Product product = iterator.next();
-            if (product.getProductId().equals(productId)) {
-                iterator.remove();
-                return true; // Product deleted
+    @Override
+    public List<Product> findAll() {
+        return productData;
+    }
+    @Override
+    public Product update(String id, Product updatedProduct) {
+        for (int i = 0; i < productData.size(); i++) {
+            Product product = productData.get(i);
+            if (product.getProductId().equals(id)) {
+                productData.set(i, updatedProduct);
+                return updatedProduct;
             }
         }
-        return false; // Product not found
+        return null; // Product not found
+    }
+    @Override
+    public Product findById(String id) {
+        for (Product product : productData) {
+            if (product.getProductId().equals(id)) {
+                return product;
+            }
+        }
+        return null; // Product not found
     }
 
-    public Iterator<Product> findAll() {
-        return productData.iterator();
-    }
+
 }
