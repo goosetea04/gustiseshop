@@ -101,17 +101,17 @@ class ProductRepositoryTest {
         Product product = createSampleProduct();
         productRepository.create(product);
 
-        boolean result = productRepository.delete(product.getProductId());
+        Product deletedProduct = productRepository.delete(product.getProductId());
 
-        assertTrue(result);
-        assertFalse(productRepository.findAll().hasNext());
+        assertNotNull(deletedProduct); // Check if product is not null to indicate successful deletion
+        assertFalse(productRepository.findAll().hasNext()); // Check if repository is empty after deletion
     }
 
     @Test
     void testDeleteNonExistingProduct() {
-        boolean result = productRepository.delete("a1b2c3d4-e5f6-4a3b-8c9d-0e1f2a3b4c5d");
+        Product deletedProduct = productRepository.delete("a1b2c3d4-e5f6-4a3b-8c9d-0e1f2a3b4c5d");
 
-        assertFalse(result);
+        assertNull(deletedProduct); // Check if deletedProduct is null to indicate unsuccessful deletion
     }
 
 

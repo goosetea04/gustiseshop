@@ -14,8 +14,8 @@ public class CarRepository implements RepositoryBase<Car>{
         carData.add(car);
         return car;
     }
-    public List<Car> findAll(){
-        return carData;
+    public Iterator<Car> findAll(){
+        return carData.iterator();
     }
     public Car findById(String id){
         for (Car car : carData) {

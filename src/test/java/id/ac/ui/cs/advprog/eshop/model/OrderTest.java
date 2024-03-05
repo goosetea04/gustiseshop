@@ -13,7 +13,7 @@ class OrderTest {
         this.products = new ArrayList<>();
         Product product1 = new Product();
         product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
-        product1.setProductName("Sampo Camp Bambang");
+        product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(2);
         Product product2 = new Product();
         product2.setProductId("a2c62328-4a37-4664-83c7-f32db8620155");

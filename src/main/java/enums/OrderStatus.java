@@ -8,7 +8,7 @@ public enum OrderStatus {
     WAITING_PAYMENT("WAITING_PAYMENT"),
     FAILED("FAILED"),
     SUCCESS("SUCCESS"),
-    CANCELLED("CANCELLED"),
+    CANCELLED("CANCELLED"),;
 
     private final String value;
 
@@ -19,7 +19,7 @@ public enum OrderStatus {
     public static boolean contains(String param) {
         for (OrderStatus orderStatus : OrderStatus.values()) {
             if (orderStatus.name().equals(param)) {
-                return true
+                return true;
             }
         }
         return false;

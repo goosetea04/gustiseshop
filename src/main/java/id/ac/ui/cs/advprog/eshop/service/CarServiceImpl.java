@@ -16,8 +16,13 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
-    public List<Car> findAll(){
-        return carRepository.findAll();
+    public List<Car> findAll() {
+        Iterator<Car> iterator = carRepository.findAll();
+        List<Car> carList = new ArrayList<>();
+        while (iterator.hasNext()) {
+            carList.add(iterator.next());
+        }
+        return carList;
     }
 
     @Override
