@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import enums.OrderStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ class PaymentTest {
 
     @Test
     void testGetStatus() {
-        assertEquals("SUCCESS", this.payment.getStatus());
+        assertEquals(OrderStatus.SUCCESS.getValue(), this.payment.getStatus());
     }
 
     @Test
@@ -55,7 +56,7 @@ class PaymentTest {
     @Test
     void testSetStatus() {
         this.payment.setStatus("REJECTED");
-        assertEquals("REJECTED", this.payment.getStatus());
+        assertEquals(OrderStatus.REJECTED.getValue(), this.payment.getStatus());
     }
 
     @Test
