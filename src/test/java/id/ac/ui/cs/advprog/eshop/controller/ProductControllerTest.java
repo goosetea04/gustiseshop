@@ -84,7 +84,7 @@ class ProductControllerTest {
     @Test
     void testDeleteProduct() {
         String id = "1";
-        doNothing().when(productService).delete(id);
+        when(productService.delete(id)).thenReturn(null);
 
         String viewName = productController.deleteProduct(id);
 
