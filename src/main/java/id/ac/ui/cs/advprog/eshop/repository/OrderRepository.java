@@ -38,4 +38,8 @@ public class OrderRepository {
         }
         return result;
     }
+    @Override
+    public Order updateStatus(String orderId, String status) {
+        Order order = orderRepository.findById(orderId);
+    }
 }
