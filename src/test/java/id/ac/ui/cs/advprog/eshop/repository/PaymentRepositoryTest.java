@@ -28,7 +28,7 @@ public class PaymentRepositoryTest {
         paymentData.put(PaymentMethod.VOUCHER.getValue(), "ESHOP12345678CAB");
 
         payments = new ArrayList<>();
-        Payment payment1 = new Payment("29f8db42-2c60-41ca-a8fd-abc8bfd947f1", PaymentMethod.VOUCHER.getValue(), paymentData, "SUCCESS");
+        Payment payment1 = new Payment("29f8db42-2c60-41ca-a8fd-abc8bfd947f1", PaymentMethod.VOUCHER.getValue(), paymentData, OrderStatus.SUCCESS.getValue());
         payments.add(payment1);
     }
     @Test
