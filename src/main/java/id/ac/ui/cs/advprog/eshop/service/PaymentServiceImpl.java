@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
+import enums.OrderStatus;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
 
@@ -25,7 +26,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void update(String paymentId, String status) {
         if (!isPaymentValid(status)) {
-            throw new IllegalArgumentException("Invalid status: " + status);
+            throw new IllegalArgumentException(status);
         }
 
         Payment payment = paymentRepository.findById(paymentId);
@@ -38,7 +39,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private boolean isPaymentValid(String status) {
-        return status != null && (status.equals("SUCCESS") || status.equals("REJECTED"));
+        return status != null && (status.equals(OrderStatus.SUCCESS.getValue()) || status.equals(OrderStatus.REJECTED.getValue()));
     }
 
     @Override

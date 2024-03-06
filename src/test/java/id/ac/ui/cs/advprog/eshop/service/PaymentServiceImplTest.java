@@ -36,9 +36,9 @@ public class PaymentServiceImplTest {
         CODData.put("Fee", "200.000");
 
         payments = new ArrayList<>();
-        Payment payment1 = new Payment("15a149b7-79b8-42c2-b4b0-5da093b5af4c", "Voucher", paymentData, "SUCCESS");
+        Payment payment1 = new Payment("15a149b7-79b8-42c2-b4b0-5da093b5af4c", PaymentMethod.VOUCHER.getValue(), paymentData, OrderStatus.SUCCESS.getValue());
         payments.add(payment1);
-        Payment payment2 = new Payment("02e082ac-fbe2-4a2b-946d-ef2b62c9c176", "Cash On Delivery", CODData, "SUCCESS");
+        Payment payment2 = new Payment("02e082ac-fbe2-4a2b-946d-ef2b62c9c176", PaymentMethod.CASH_ON_DELIVERY.getValue(), CODData, OrderStatus.SUCCESS.getValue());
         payments.add(payment2);
     }
 
@@ -84,15 +84,15 @@ public class PaymentServiceImplTest {
     }
     @Test
     void updateStatusInvalidPaymentIdTest() {
-        doReturn(null).when(paymentRepository).findById("zczc");
+        doReturn(null).when(paymentRepository).findById("wkwk");
 
-        assertThrows(IllegalArgumentException.class, () -> paymentService.update("zczc", "SUCCESS"));
+        assertThrows(IllegalArgumentException.class, () -> paymentService.update("wkwk", OrderStatus.SUCCESS.getValue()));
     }
     @Test
     void updateStatusWhenPaymentExistsTest() {
 
         String paymentId = "ddfdecbc-5947-47bd-8326-35545d43a620";
-        String status = "SUCCESS";
+        String status = OrderStatus.SUCCESS.getValue();
         Payment payment = new Payment(paymentId, "Voucher", null, null);
         doReturn(payment).when(paymentRepository).findById(paymentId);
 
@@ -107,7 +107,7 @@ public class PaymentServiceImplTest {
     void testUpdateStatusWhenPaymentNotFound() {
 
         String paymentId = "ddfdecbc-5947-47bd-8326-35545d43a620";
-        String status = "SUCCESS";
+        String status = OrderStatus.SUCCESS.getValue();
         doReturn(null).when(paymentRepository).findById(paymentId);
 
 
@@ -124,31 +124,31 @@ public class PaymentServiceImplTest {
     void testValidateVoucherCodeWithValidCode() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("Voucher", "ESHOP12345678CAB");
-        Payment payment = new Payment("ddfdecbc-5947-47bd-8326-35545d494de8", "Voucher", paymentData, "SUCCESS");
+        Payment payment = new Payment("ddfdecbc-5947-47bd-8326-35545d494de8", PaymentMethod.VOUCHER.getValue(), paymentData, OrderStatus.SUCCESS.getValue());
 
         String status = paymentService.confirmVoucherCode(payment.getPaymentData().get("Voucher"));
 
-        assertEquals("SUCCESS", status);
+        assertEquals(OrderStatus.SUCCESS.getValue(), status);
     }
     @Test
     void testValidateVoucherCodeWithInvalidCode() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("Voucher", "ga ada voucher ka");
-        Payment payment = new Payment("2b420113-bd1b-4b18-9fb2-72e8221aaf43", "Voucher", paymentData, "SUCCESS");
+        Payment payment = new Payment("2b420113-bd1b-4b18-9fb2-72e8221aaf43", PaymentMethod.VOUCHER.getValue(), paymentData, OrderStatus.SUCCESS.getValue());
 
         String status = paymentService.confirmVoucherCode(payment.getPaymentData().get("Voucher"));
 
-        assertEquals("REJECTED", status);
+        assertEquals(OrderStatus.REJECTED.getValue(), status);
     }
     @Test
     void testValidateVoucherCodeWithInvalidCodeNumber() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("Voucher", "ESHOP123456EDCAB");
-        Payment payment = new Payment("2b420113-bd1b-4b18-9fb2-72e8221aaf53", "Voucher", paymentData, "SUCCESS");
+        Payment payment = new Payment("2b420113-bd1b-4b18-9fb2-72e8221aaf53", PaymentMethod.VOUCHER.getValue(), paymentData, OrderStatus.SUCCESS.getValue());
 
         String status = paymentService.confirmVoucherCode(payment.getPaymentData().get("Voucher"));
 
-        assertEquals("REJECTED", status);
+        assertEquals(OrderStatus.REJECTED.getValue(), status);
     }
     // ----- Tests for COD -----
     @Test
