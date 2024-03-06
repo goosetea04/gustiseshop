@@ -51,3 +51,55 @@ In conclusion, implementing SOLID has alot of advantages in the coding developme
 ### Reflection 3 
 
 A major problem that SOLID brings is Overcomplexity and Overnengineering. Someone wanting to modfiy our code may find it easier to follow but the implementation they would have to do to achieve those modifciations would be much more than if we were to not apply solid principles. Furthermore, SOLID also encourages abstraction so that our program will be too abstract meaning, that over time, our codebase might be harder to understand and maintain.
+
+# Assignment 4
+
+## Reflection 1
+
+### Do I have enough Functional tests to reassure myself that my application really works, from the point of view of the user?
+
+Up to now, we have only made unit tests. There are no functional tests that we made, so I cannot say that there are enough functional tests implemented to cover all functionalities typically that will be done by the user. This is because we did not implement a controller for Payment and Order.
+
+### Am I testing all the edge cases thoroughly?
+
+For the most part, I believe that I have covered all of the edge cases for each function in my repository, service ets. In the tests folder, we can see that all the functions correlate to some function in `java/main`. This signifies to me that all of my tests cover all possible edge cases. In all of my implementation of fields and whatnot, there are tests to see if the field is valid and invalid. In addition to that, there are tests for creation, deletion and update. These are all actions the typical user will do.
+
+### Do I have tests that check if all my components fit together properly? Could some integrated tests do this, or are functional tests enough?
+
+Again, we have not made any functional tests, since we have not implement a controller for neither the `Payment` class nor the `Order` class. So far, the unit tests are just individual features of what a user might do in our program, but as far as joined processes and use cases for each user, we have not done that yet.
+
+### Are my tests giving me the confidence to refactor my code, fearlessly and frequently?
+
+Yes, I believve that with the tests I have now for the classes I have now, I am able to change small details regarding the assertion with something from the  `enums` library and have the test still work. With the way I implemented my assertions, I am confident that all the changes are with refactoring, should not affect the utcome of the test. For example, I change the content og "Voucher" with `PaymentMethod.SUCCESS.getValue()`, the `assertEqual()` assertion will still work.
+
+### Are my tests helping me to drive out a good design? If I have a lot of integration tests but less unit tests, do I need to make more unit tests to get better feedback on my code design?
+
+I've tested every part of the Order feature thoroughly, even checking for things that shouldn't really happen if the controller and interface are built right (like orders that don't exist, which shouldn't be possible since we only allow viewing orders, not deleting them). This thorough testing helps me understand my code design better, so when I make changes, I can easily spot any errors.
+
+### Are my feedback cycles as fast as I would like them? When do I get warned about bugs, and is there any practical way to make that happen sooner?
+
+Due to the CI/CD that we implemented in the previous modules, I am supposed to get notified about bugs in my code. However, there are problems with my CI/CD after I refactored some of my classes to implement SOLID. These changes have caused some problems in my CI/Cd that I have not fully fixed. Currently, I am notified of bugs in the problems section of Intellij. This is by no means an effective way of finding out bugs, but that sgould be resolved when I fix my CI/CD code.
+
+### Is there some way that I could write faster integration tests that would get me feedback quicker?
+
+As mentioned before, there are no integration tests.
+
+### Can I run a subset of the full test suite when I need to?
+
+We can choose which tests we want to run. We can run each test class individually by just running the tests on Intellij. Furthermore, each test is grouped based on its functionality. If we want to run all `Service` tests, we just need to run the Service folder. If we want to run the whole test suite, thats available as well.
+
+### Am I spending too much time waiting for tests to run, and thus less time in a productive flow state?
+
+I do not believe that my tests are taking too long to run. The tests are maximum 2.5 seconds to run, and this is great because it means there are more chances for us to be productive.
+
+## Is F.I.R.S.T. implemented?
+
+- Fast: As mentioned before, our max time to run a test is 2.5 seconds. This is achieved by mocking.
+
+-  Isolated: The tests made dont depend on any other datta in any other classes or tests. Each assert and test are just implemente dand evaluated in their own test suites.
+
+-  Repeatable: Yes, they are able to be repeated as many times as desired since they do not depend on any external factors, and as mentioned before, they are not affected y other tests.
+
+-  Self-validating: With all of the assertions we have to consider a test a test, it validates all answers desired from each test based on whether it is True, False, Equal, Nul etc. This signifies that our tests are self-validating.
+
+-  Thorough: I believe that all the tests I made are thorough in the sense that it covers all the use cases of each desired feature in the java class. This is then verified by making the class and seeing that it really does cover all aspects desired. 

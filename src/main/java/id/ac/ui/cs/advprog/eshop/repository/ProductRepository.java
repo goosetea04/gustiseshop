@@ -47,8 +47,8 @@ public class ProductRepository implements RepositoryBase<Product> {
     }
 
     @Override
-    public List<Product> findAll() {
-        return productData;
+    public Iterator<Product> findAll() {
+        return productData.iterator();
     }
     @Override
     public Product update(String id, Product updatedProduct) {

@@ -42,6 +42,11 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        Iterator<Product> iterator = productRepository.findAll();
+        List<Product> productList = new ArrayList<>();
+        while (iterator.hasNext()) {
+            productList.add(iterator.next());
+        }
+        return productList;
     }
 }
