@@ -26,7 +26,6 @@ public class PaymentServiceImplTest {
     @Mock
     PaymentRepository paymentRepository;
     List<Payment> payments;
-    private Payment ;
 
     @BeforeEach
     void setUp() {
@@ -102,7 +101,7 @@ public class PaymentServiceImplTest {
 
 
         assertEquals(status, payment.getStatus());
-        verify(paymentRepository, times(1)).savePayment(payment);
+        verify(paymentRepository, times(1)).save(payment);
     }
     @Test
     void testUpdateStatusWhenPaymentNotFound() {
@@ -117,7 +116,7 @@ public class PaymentServiceImplTest {
         });
 
         assertEquals(paymentId, exception.getMessage());
-        verify(paymentRepository, never()).savePayment(any());
+        verify(paymentRepository, never()).save(any());
     }
     // ----- Tests for Voucher Code -----
 
